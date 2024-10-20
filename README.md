@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Create the project using Next.js -> npx create-next-app@latest weather-app
 
-## Getting Started
+Selected the default options like typescript, Tailwind CSS, etc.
 
-First, run the development server:
+Install Lucide Icons -> npm install lucide-react
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+// File Structure:
+- Utils
+    - constants.ts file to store the default cities.
+    - types.ts file to define the types for the city weather data.
+    - weatherIcons.tsx file to map the weather condition to the corresponding Lucide icon.
+    - api.ts file to store the api call to openweathermap.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Components
+    - CityCard.tsx file to display the city weather information.
+    - Favorites.tsx file to display the favorite cities.
+    - CitySearch.tsx file to search for the city weather information.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- App
+    - layout.tsx file to set the background color.
+    - page.tsx file to render the main page.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+// Explanation:
+- Page.tsx
+    - State to store the cities weather data and favorites.
+    - useEffect to load the weather data and favorites from local storage.
+    - Function to handle the city search and add the city weather data to the cities weather state.
+    - Function to update the favorites state.
+    - Filtered cities weather to display the cities that are not in favorites.
+    - Render the CitySearch, Favorites, and CityCard components.
 
-## Learn More
+- Layout.tsx
+    - Set the background color.
 
-To learn more about Next.js, take a look at the following resources:
+- CityCard.tsx
+    - Display the city weather information.
+    - Handle the favorite click event to add or remove the city from favorites.
+    - Use useEffect to update the favorite state when the component is mounted.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Favorites.tsx
+    - Display the favorite cities.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- CitySearch.tsx
+    - Search for the city weather information.
+    - Handle the add city click event to add the city weather data to the cities weather state.
 
-## Deploy on Vercel
+- api.ts
+    - Fetch the weather data from openweathermap.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- types.ts
+    - Define the types for the city weather data.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- constants.ts
+    - Store the default cities.
+
+- weatherIcons.tsx
+    - Map the weather condition to the corresponding Lucide icon.
