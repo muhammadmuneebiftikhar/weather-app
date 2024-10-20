@@ -33,7 +33,7 @@ type ForecastDay = {
     temp: number;
     humidity: number;
   };
-  weather: { description: string; icon: string; }[];
+  weather: {main: string; description: string; icon: string; }[];
   wind: { speed: number };
 };
 
