@@ -3,7 +3,7 @@ import { CityWeather } from "../utils/types";
 
 interface FavoritesProps {
   favorites: CityWeather[];
-  onFavoritesChange: (newFavorites: CityWeather[]) => void;
+  onFavoritesChange: (newFavorites: string[]) => void;
 }
 
 export default function Favorites({ favorites, onFavoritesChange }: FavoritesProps) {

@@ -2,7 +2,6 @@ import { CityWeather, CityForecast } from "./types";
 
 export const fetchWeatherData = async (city: string): Promise<CityWeather> => {
   try {
-    console.log(`Fetching weather data for ${city}`);
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&units=metric`
     );

@@ -19,19 +19,26 @@ export default function Home() {
     setCitiesWeather(weatherData);
   };
 
+  const loadFavoriteWeatherData = async () => {
+    const storedFavoriteNames = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const favoriteWeatherData: CityWeather[] = await Promise.all(
+      storedFavoriteNames.map((cityName: string) => fetchWeatherData(cityName))
+    );
+    setFavorites(favoriteWeatherData);
+  };
+
   useEffect(() => {
     loadWeatherData();
-
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    setFavorites(storedFavorites);
+    loadFavoriteWeatherData();
   }, []);
 
   const handleCityAdd = (cityWeather: CityWeather) => {
     setCitiesWeather([cityWeather, ...citiesWeather]);
   };
 
-  const updateFavorites = (newFavorites: CityWeather[]) => {
-    setFavorites(newFavorites);
+  const updateFavorites = (newFavoriteCities: string[]) => {
+    localStorage.setItem('favorites', JSON.stringify(newFavoriteCities));
+    loadFavoriteWeatherData();
   };
 
   const filteredCitiesWeather = citiesWeather.filter(

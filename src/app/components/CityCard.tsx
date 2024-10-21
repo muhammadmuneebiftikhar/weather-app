@@ -7,34 +7,32 @@ import Link from 'next/link';
 interface CityCardProps {
   cityWeather: CityWeather;
   isFavorite?: boolean;
-  onFavoritesChange: (newFavorites: CityWeather[]) => void;
+  onFavoritesChange: (newFavorites: string[]) => void;
 }
 
 export default function CityCard({ cityWeather, isFavorite = false, onFavoritesChange }: CityCardProps) {
   const { name, sys, main, weather, wind } = cityWeather;
   const [isFavoriteState, setIsFavoriteState] = useState(isFavorite);
-  
+
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-    const isAlreadyFavorite = favorites.some((favorite: CityWeather) => favorite.name === cityWeather.name);
+    const isAlreadyFavorite = favorites.includes(cityWeather.name);
     setIsFavoriteState(isAlreadyFavorite);
   }, [cityWeather]);
 
   const handleFavoriteClick = () => {
     const favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
-    const isAlreadyFavorite = favorites.some((favorite: CityWeather) => favorite.name === cityWeather.name);
+    const isAlreadyFavorite = favorites.includes(cityWeather.name);
 
     let updatedFavorites;
     if (isAlreadyFavorite) {
-      updatedFavorites = favorites.filter((favorite: CityWeather) => favorite.name !== cityWeather.name);
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      updatedFavorites = favorites.filter((favorite: string) => favorite !== cityWeather.name);
       setIsFavoriteState(false);
     } else {
-      updatedFavorites = [...favorites, cityWeather];
-      localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+      updatedFavorites = [...favorites, cityWeather.name];
       setIsFavoriteState(true);
     }
-    
+
     onFavoritesChange(updatedFavorites);
   };
 
